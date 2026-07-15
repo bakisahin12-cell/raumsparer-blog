@@ -1,0 +1,49 @@
+name: Automatisch neuen Artikel veröffentlichen
+
+on:
+  schedule:
+    # Jeden Montag um 07:00 UTC (09:00 Uhr deutscher Sommerzeit)
+    - cron: "0 7 * * 1"
+  workflow_dispatch: {}   # erlaubt manuelles Auslösen über den "Run workflow" Button
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: pip install anthropic markdown jinja2
+
+      - name: Neuen Artikel generieren
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python generate_post.py
+
+      - name: Seite bauen
+        run: python build_site.py
+
+      - name: Neuen Artikel committen
+        run: |
+          git config user.name "auto-blog-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add posts/
+          git diff --quiet --cached || git commit -m "Automatischer Artikel $(date +%Y-%m-%d)"
+          git push
+
+      - name: GitHub Pages Artefakt hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Auf GitHub Pages veröffentlichen
+        uses: actions/deploy-pages@v4
