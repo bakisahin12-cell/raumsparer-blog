@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}raumsparer.blog{% endblock %}</title>
+<meta name="description" content="{% block description %}Kompakte Möbel & clevere Ideen für kleine Wohnungen und Home-Offices.{% endblock %}">
+<link rel="stylesheet" href="{{ root }}static/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="{{ root }}index.html">raum<span>sparer</span>.blog</a>
+    <span class="tagline">Grundrisse für kleines Geld & kleine Räume</span>
+  </div>
+</header>
+
+<main class="wrap">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© {{ year }} raumsparer.blog · <a href="{{ root }}about.html">Über / Affiliate-Hinweis</a></p>
+    <p>Alle Inhalte werden mit Unterstützung von KI erstellt und redaktionell kuratiert.</p>
+  </div>
+</footer>
+</body>
+</html>

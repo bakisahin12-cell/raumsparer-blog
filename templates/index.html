@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <span class="eyebrow">Nr. 01 / kleine Räume, große Wirkung</span>
+  <h1>Home-Office &amp; Möbel für kleine Wohnungen</h1>
+  <p class="lede">Getestete Ideen, Maße und Produkt-Empfehlungen für alle, die auf wenig Fläche viel unterbringen wollen.</p>
+</section>
+
+<ul class="post-list">
+  {% for post in posts %}
+  <li>
+    <span class="post-meta">{{ post.date }}</span>
+    <div>
+      <h2><a href="{{ root }}posts/{{ post.slug }}.html">{{ post.title }}</a></h2>
+      <p>{{ post.excerpt }}</p>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} · raumsparer.blog{% endblock %}
+{% block description %}{{ post.excerpt }}{% endblock %}
+{% block content %}
+<article>
+  <span class="eyebrow">{{ post.date }} · {{ post.read_minutes }} Min. Lesezeit</span>
+  <h1>{{ post.title }}</h1>
+
+  <div class="plan-frame">
+    <span class="tick-br"></span><span class="tick-bl"></span>
+    {{ post.body_html | safe }}
+  </div>
+
+  <p class="disclosure">
+    Affiliate-Hinweis: Dieser Artikel enthält Partnerlinks (z. B. Amazon-PartnerNet). Kauf über diese Links kostet
+    dich nichts extra, unterstützt aber diese Seite. Mehr dazu auf der <a href="{{ root }}about.html">Über-Seite</a>.
+  </p>
+</article>
+{% endblock %}

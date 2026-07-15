@@ -1,0 +1,187 @@
+/* ==========================================================================
+   raumsparer.blog — Design: "Grundriss" (Bauplan-Ästhetik für Kleinraum-Möbel)
+   Farben:   Papier #EEF0EC · Tinte #1B2A25 · Tanne #2F4538 · Messing #B08D2A · Linie #C7CCC4
+   Typo:     Fraunces (Display) · Source Serif 4 (Text) · IBM Plex Mono (Maße/Meta)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --paper:#EEF0EC;
+  --paper-line:#C7CCC4;
+  --ink:#1B2A25;
+  --ink-soft:#425048;
+  --tanne:#2F4538;
+  --messing:#B08D2A;
+  --max:760px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  background:
+    linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/100% 32px,
+    var(--paper);
+  color:var(--ink);
+  font-family:'Source Serif 4', serif;
+  font-size:18px;
+  line-height:1.65;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important;}
+}
+
+a{color:var(--tanne); text-decoration-thickness:1px; text-underline-offset:3px;}
+a:hover{color:var(--messing);}
+a:focus-visible, button:focus-visible{outline:2px solid var(--messing); outline-offset:2px;}
+
+.wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+/* ---- header ---- */
+header.site{
+  border-bottom:1px solid var(--ink);
+  padding:28px 0 18px;
+  background:var(--paper);
+}
+header.site .wrap{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+.brand{
+  font-family:'Fraunces', serif;
+  font-weight:700;
+  font-size:26px;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+  text-decoration:none;
+}
+.brand span{color:var(--messing);}
+.tagline{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12.5px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+/* ---- corner-tick "measurement" motif, the signature element ---- */
+.plan-frame{
+  position:relative;
+  border:1px solid var(--ink);
+  padding:28px;
+  margin:36px 0;
+  background:rgba(255,255,255,.35);
+}
+.plan-frame::before,.plan-frame::after,
+.plan-frame .tick-br, .plan-frame .tick-bl{
+  content:"";
+  position:absolute;
+  width:14px; height:14px;
+  border:1.5px solid var(--messing);
+}
+.plan-frame::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+.plan-frame::after{ top:-1px; right:-1px; border-left:none; border-bottom:none; }
+.plan-frame .tick-bl{ bottom:-1px; left:-1px; border-right:none; border-top:none; }
+.plan-frame .tick-br{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+
+/* ---- hero ---- */
+.hero{padding:56px 0 24px;}
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:13px;
+  color:var(--messing);
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  display:block;
+}
+h1{
+  font-family:'Fraunces', serif;
+  font-weight:700;
+  font-size:clamp(32px, 5vw, 52px);
+  line-height:1.08;
+  margin:0 0 18px;
+  letter-spacing:-0.015em;
+}
+.lede{font-size:19px; color:var(--ink-soft); max-width:56ch;}
+
+/* ---- post list ---- */
+.post-list{list-style:none; margin:40px 0; padding:0;}
+.post-list li{
+  border-top:1px solid var(--paper-line);
+  padding:22px 0;
+  display:grid;
+  grid-template-columns:90px 1fr;
+  gap:18px;
+  align-items:baseline;
+}
+.post-list li:last-child{border-bottom:1px solid var(--paper-line);}
+.post-meta{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px;
+  color:var(--ink-soft);
+}
+.post-list h2{
+  font-family:'Fraunces', serif;
+  font-size:23px;
+  font-weight:600;
+  margin:0 0 6px;
+}
+.post-list h2 a{color:var(--ink); text-decoration:none;}
+.post-list h2 a:hover{color:var(--tanne);}
+.post-list p{margin:0; color:var(--ink-soft); font-size:16px;}
+
+/* ---- article ---- */
+article h2{font-family:'Fraunces', serif; font-size:26px; margin-top:44px;}
+article h3{font-family:'Fraunces', serif; font-size:21px; margin-top:32px;}
+article p{margin:0 0 20px;}
+article ul, article ol{margin:0 0 20px; padding-left:22px;}
+article li{margin-bottom:6px;}
+article blockquote{
+  margin:28px 0; padding:4px 0 4px 20px;
+  border-left:2px solid var(--messing);
+  color:var(--ink-soft); font-style:italic;
+}
+
+.spec-table{width:100%; border-collapse:collapse; margin:24px 0; font-size:15.5px;}
+.spec-table th, .spec-table td{
+  border-bottom:1px solid var(--paper-line);
+  padding:10px 8px; text-align:left;
+}
+.spec-table th{font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft);}
+
+.affiliate-box{
+  border:1px solid var(--tanne);
+  background:rgba(47,69,56,.06);
+  padding:20px 22px;
+  margin:26px 0;
+}
+.affiliate-box .label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11.5px; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--tanne); display:block; margin-bottom:8px;
+}
+.affiliate-box a{font-weight:600;}
+
+.disclosure{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px; color:var(--ink-soft);
+  border-top:1px dashed var(--paper-line);
+  margin-top:48px; padding-top:14px;
+}
+
+/* ---- footer ---- */
+footer.site{
+  border-top:1px solid var(--ink);
+  margin-top:60px;
+  padding:26px 0 60px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12.5px;
+  color:var(--ink-soft);
+}
+footer.site a{color:var(--ink-soft);}
+
+@media (max-width:560px){
+  .post-list li{grid-template-columns:1fr;}
+  body{font-size:16.5px;}
+}
