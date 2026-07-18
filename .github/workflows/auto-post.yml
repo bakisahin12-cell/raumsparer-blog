@@ -7,6 +7,7 @@ on:
       - "posts/**"
       - "templates/**"
       - "static/**"
+      - "build_site.py"
   workflow_dispatch: {}
 
 permissions:
