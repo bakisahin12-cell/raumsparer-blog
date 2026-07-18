@@ -11,6 +11,7 @@ Nutzung:
 """
 import re
 import shutil
+import urllib.parse
 from datetime import datetime
 from pathlib import Path
 
@@ -22,6 +23,27 @@ POSTS_DIR = ROOT / "posts"
 TEMPLATES_DIR = ROOT / "templates"
 STATIC_DIR = ROOT / "static"
 SITE_DIR = ROOT / "site"
+
+# Deine Amazon-PartnerNet Tracking-ID (Partner-ID)
+AMAZON_TRACKING_ID = "raumsparerblo-21"
+
+PLACEHOLDER_LINK_RE = re.compile(r'href="#" rel="sponsored nofollow"')
+
+
+def amazon_search_link(suchbegriff: str) -> str:
+    """Baut einen echten Amazon-Suchlink inkl. Tracking-ID (kein ASIN nötig)."""
+    query = urllib.parse.quote_plus(suchbegriff)
+    return f'https://www.amazon.de/s?k={query}&tag={AMAZON_TRACKING_ID}'
+
+
+def insert_affiliate_link(body_html: str, suchbegriff: str) -> str:
+    """Ersetzt den Platzhalter-Link (href="#") im Affiliate-Block durch einen
+    echten, funktionierenden Amazon-Suchlink mit Tracking-ID."""
+    if not suchbegriff:
+        return body_html
+    link = amazon_search_link(suchbegriff)
+    replacement = f'href="{link}" rel="sponsored nofollow" target="_blank"'
+    return PLACEHOLDER_LINK_RE.sub(replacement, body_html)
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n(.*)$", re.DOTALL)
 
@@ -53,6 +75,7 @@ def load_posts() -> list[dict]:
         body_html = markdown.markdown(
             body_md, extensions=["tables", "fenced_code", "extra"]
         )
+        body_html = insert_affiliate_link(body_html, meta.get("amazon_suchbegriff", ""))
         word_count = len(re.findall(r"\w+", body_md))
         posts.append(
             {
