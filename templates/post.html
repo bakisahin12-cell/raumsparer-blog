@@ -3,6 +3,7 @@
 {% block description %}{{ post.excerpt }}{% endblock %}
 {% block content %}
 <article>
+  <span class="hero-icon">{{ post.icon | safe }}</span>
   <span class="eyebrow">{{ post.date }} · {{ post.read_minutes }} Min. Lesezeit</span>
   <h1>{{ post.title }}</h1>
 
