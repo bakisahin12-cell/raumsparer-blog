@@ -9,6 +9,7 @@
 <ul class="post-list">
   {% for post in posts %}
   <li>
+    <span class="post-icon">{{ post.icon | safe }}</span>
     <span class="post-meta">{{ post.date }}</span>
     <div>
       <h2><a href="{{ root }}posts/{{ post.slug }}.html">{{ post.title }}</a></h2>
