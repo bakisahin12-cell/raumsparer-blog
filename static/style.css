@@ -181,7 +181,23 @@ footer.site{
 }
 footer.site a{color:var(--ink-soft);}
 
+/* ---- Icons (handgezeichnete Linien-Illustrationen) ---- */
+.post-icon{
+  color:var(--tanne);
+  flex-shrink:0;
+}
+.post-list .post-icon{width:44px; height:44px;}
+.hero-icon{
+  width:120px; height:120px;
+  color:var(--messing);
+  margin-bottom:8px;
+}
+.post-list li{
+  grid-template-columns:44px 90px 1fr;
+}
 @media (max-width:560px){
-  .post-list li{grid-template-columns:1fr;}
+  .post-list li{grid-template-columns:36px 1fr;}
+  .post-list .post-meta{grid-column:2; order:-1;}
+  .post-list h2, .post-list p{grid-column:2;}
   body{font-size:16.5px;}
 }
