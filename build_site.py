@@ -47,7 +47,7 @@ def insert_affiliate_link(body_html: str, suchbegriff: str) -> str:
 
 
 # Handgezeichnete Linien-Icons (keine Fotos -> keine Lizenzprobleme),
-# passend zum "Bauplan"-Design der Seite. currentColor -> erbt die Textfarbe.
+# passend zum Design der Seite. currentColor -> erbt die Textfarbe.
 ICONS = {
     "schreibtisch": '''<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24h52M10 24v28M54 24v28M6 40h52"/><rect x="16" y="14" width="20" height="10" rx="1"/></svg>''',
     "monitor": '''<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="10" width="32" height="22" rx="2"/><path d="M32 32v8M22 50h20M32 40c0 4-4 6-4 10M32 40c0 4 4 6 4 10"/></svg>''',
@@ -132,6 +132,18 @@ def build():
     about_tpl = env.get_template("about.html")
     (SITE_DIR / "about.html").write_text(
         about_tpl.render(root="", year=year), encoding="utf-8"
+    )
+
+    # Impressum
+    impressum_tpl = env.get_template("impressum.html")
+    (SITE_DIR / "impressum.html").write_text(
+        impressum_tpl.render(root="", year=year), encoding="utf-8"
+    )
+
+    # Datenschutz
+    datenschutz_tpl = env.get_template("datenschutz.html")
+    (SITE_DIR / "datenschutz.html").write_text(
+        datenschutz_tpl.render(root="", year=year), encoding="utf-8"
     )
 
     # Einzelne Artikel
